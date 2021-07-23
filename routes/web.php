@@ -13,15 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 
-
+//dentro questo auth::route ci sono tutte le rotte dell'autenticazione
 Auth::routes();
+// Auth::routes(['verify'=>true]);  ex array associativo, in questo caso tolgo la verifica dell'email
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')
     ->namespace('Admin')
@@ -30,5 +28,9 @@ Route::middleware('auth')
     ->group(function() {
 
         Route::get('/', 'HomeController@index') -> name('home');
+
+    //genero le sette rotte (nome dell'url + nome del controller) e le inserisco qui dentro perchè devo essere protette
+    Route::resource('posts', 'PostController');
     
 });
+
