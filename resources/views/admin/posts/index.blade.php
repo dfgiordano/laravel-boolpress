@@ -14,14 +14,12 @@
             <tbody>
                 @foreach ($posts as $item)
                     <tr>
-                        <td>
-                            {{ $item->id }}
-                        </td>
+                        <td>{{ $item->id }}</td>
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->slug }}</td>
                         <td>
                             <button class="btn btn-info">
-                                show
+                                <a href="{{ route('admin.posts.show', $item->id) }}">Show</a>
                             </button>
                         </td>
                         <td>
