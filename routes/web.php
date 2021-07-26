@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//rotte pubbliche
 Route::get('/', 'HomeController@index')->name('home');
 
 
@@ -29,8 +29,11 @@ Route::middleware('auth')
 
         Route::get('/', 'HomeController@index') -> name('home');
 
-    //genero le sette rotte (nome dell'url + nome del controller) e le inserisco qui dentro perchè devo essere protette
-    Route::resource('posts', 'PostController');
+        //genero le sette rotte (nome dell'url + nome del controller) e le inserisco qui dentro perchè devo essere protette
+        Route::resource('posts', 'PostController');
     
 });
 
+Route::get('{any?}', function() {
+    return view('guest.home');
+}) -> where('any', '.*');
