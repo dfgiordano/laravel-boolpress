@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="container">
-        <table class="table table-striped">
+        <h1>Elenco degli articoli</h1>
+        <a class="btn btn-light" href="{{ route('admin.posts.create') }}">Scrivi un nuovo articolo</a>
+        <table class="table table-striped mt-5">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -19,17 +21,17 @@
                         <td>{{ $item->slug }}</td>
                         <td>
                             <button class="btn btn-info">
-                                <a href="{{ route('admin.posts.show', $item->id) }}">Show</a>
+                                <a href="{{ route('admin.posts.show', $item->id) }}">Mostra</a>
                             </button>
                         </td>
                         <td>
                             <button class="btn btn-warning">
-                                modify
+                                <a href="{{ route('admin.posts.edit', $item->id) }}">Modifica</a>
                             </button>
                         </td>
                         <td>
                             <button class="btn btn-danger">
-                                delete
+                                Elimina
                             </button>
                         </td>
                     </tr>
