@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Laravel\Ui\Presets\Vue;
 use Illuminate\Support\Str;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -27,9 +28,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $post)
     {
-        return view ('admin.posts.create');
+        $categories = Category::all();
+        return view ('admin.posts.create',compact('categories'));
     }
 
     /**

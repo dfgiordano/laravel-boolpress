@@ -19,6 +19,15 @@
                 <textarea class="form-control @error('post') is-invalid
                 @enderror " id="articolo" name="post" rows="6">{{ old('post') }}</textarea>
               </div>
+              <div class="form-group">
+                  <label for="category_id">Categoria</label>
+                  <select name="category_id" id="category_id">
+                      <option value="">Seleziona la categoria</option>
+                      @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                      @endforeach
+                  </select>
+              </div>
               <button class="btn btn-success" type="submit">Salva</button>
               <a class="btn btn-primary ml-3" href="{{ route('admin.posts.index') }}">Elenco articoli</a>
         </form>
