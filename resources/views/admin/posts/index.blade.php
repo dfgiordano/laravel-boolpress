@@ -30,9 +30,11 @@
                             </button>
                         </td>
                         <td>
-                            <button class="btn btn-danger">
-                                Elimina
-                            </button>
+                            <form action="{{ route('admin.posts.destroy', $item->id)}}"  method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Elimina</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

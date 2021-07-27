@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //rotte pubbliche
-Route::get('/', 'HomeController@index')->name('home');
+// Route::get('/', 'HomeController@index')->name('home');
 
 
 //dentro questo auth::route ci sono tutte le rotte dell'autenticazione
@@ -36,4 +36,4 @@ Route::middleware('auth')
 
 Route::get('{any?}', function() {
     return view('guest.home');
-}) -> where('any', '.*');
+}) -> where('any', '.*')->name('home');

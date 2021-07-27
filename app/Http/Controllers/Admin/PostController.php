@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use Laravel\Ui\Presets\Vue;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -43,10 +44,30 @@ class PostController extends Controller
 
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required'
+            'post' => 'required'
         ]);
 
-        
+        $newPost = new Post();
+        $slug = Str::slug($data['title'], '-');
+        //vado a sostituire il riempimento ad uno ad uno, ma devo definire fillable nel model
+        $data['slug'] = $slug;
+        $newPost -> fill($data);
+        //faccio una query per cercare se esiste già il post, se è null non esisite,se esiste non posso inserirlo perchè unique
+        $existingPostSlug = Post::where('slug' , $slug)->first();
+        // dd($existingPostSlug);
+
+        $slugBase = $slug;
+        $counter = 1;
+
+        while($existingPostSlug) {
+            $slug = $slugBase . '-' . $counter;
+
+            $existingPostSlug = Post::where('slug' , $slug)->first();
+            $counter ++;
+        }
+        $newPost->save();
+
+        return redirect()->route('admin.posts.show', $newPost->id);
     }
 
     /**
@@ -81,10 +102,35 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+        //validazione resta uguale al create
+        $request->validate([
+            'title' => 'required|max:255',
+            'post' => 'required'
+        ]);
+        if($post->title != $data['title']) {
+            $slug = Str::slug($data['title'], '-');
+
+            $existingPostSlug = Post::where('slug' , $slug)->first();
+
+            $slugBase = $slug;
+            $counter = 1;
+
+            while($existingPostSlug) {
+                $slug = $slugBase . '-' . $counter;
+
+                $existingPostSlug = Post::where('slug' , $slug)->first();
+                $counter ++;
+            }
+            $data['slug'] = $slug;
+            }
+            $post->update($data);
+
+            return redirect()->route('admin.posts.show', $post->id);
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -92,8 +138,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }
