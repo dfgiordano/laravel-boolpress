@@ -16,10 +16,21 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="post"></label>
+                <label for="post">Testo</label>
                 <textarea class="form-control @error('post') is-invalid
-                @enderror " id="post" name="post" rows="6">{{ $post->post }}</textarea>
+                @enderror " id="post" name="post" rows="6" placeholder="Inserisci il testo dell'articolo">{{ old('post', $post->post) }}</textarea>
               </div>
+              <div class="form-group">
+                <label for="category_id">Categoria</label>
+                <select name="category_id" id="category_id">
+                    <option value="">Seleziona la categoria</option>
+                    @foreach ($categories as $category)
+                          <option value="{{ $category->id }}"
+                              {{ ($category->id == old('category_id',$post->category_id)) ? 'selected' : '' }}
+                              > {{ $category->name }} </option>
+                    @endforeach
+                </select>
+            </div>
               <button class="btn btn-success" type="submit">Salva</button>
               <a class="btn btn-primary ml-3" href="{{ route('admin.posts.index') }}">Elenco articoli</a>
         </form>

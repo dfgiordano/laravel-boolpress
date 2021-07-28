@@ -31,6 +31,9 @@ Route::middleware('auth')
 
         //genero le sette rotte (nome dell'url + nome del controller) e le inserisco qui dentro perchè devo essere protette
         Route::resource('posts', 'PostController');
+
+        //creare la singola rotta per categories-show
+        Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
     
 });
 

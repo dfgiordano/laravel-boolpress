@@ -46,7 +46,9 @@ class PostController extends Controller
 
         $request->validate([
             'title' => 'required|max:255',
-            'post' => 'required'
+            'post' => 'required',
+            //aggiungo la validation per evitare che venga cambiato l'id delle categorie(validation laravel)
+            'category_id' => 'nullable|exists:categories, id'
         ]);
 
         $newPost = new Post();
@@ -93,8 +95,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
-    {
-        return view ('admin.posts.edit', compact('post'));
+    {   
+        //recupero le categorie per riuscire a stamparle in edit.blade.php
+        $categories = Category::all();
+
+        return view ('admin.posts.edit', compact('post','categories'));
     }
 
     /**

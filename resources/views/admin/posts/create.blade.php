@@ -15,16 +15,18 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="articolo"></label>
+                <label for="post">Testo</label>
                 <textarea class="form-control @error('post') is-invalid
-                @enderror " id="articolo" name="post" rows="6">{{ old('post') }}</textarea>
+                @enderror " id="post" name="post" rows="6" placeholder="Inserici il testo dell'articolo"></textarea>
               </div>
               <div class="form-group">
                   <label for="category_id">Categoria</label>
                   <select name="category_id" id="category_id">
                       <option value="">Seleziona la categoria</option>
                       @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                            <option value="{{ $category->id }}"
+                                {{ ($category->id == old('category_id')) ? 'selected' : '' }}
+                                > {{ $category->name }} </option>
                       @endforeach
                   </select>
               </div>
