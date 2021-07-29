@@ -8,6 +8,7 @@ use App\Post;
 use Laravel\Ui\Presets\Vue;
 use Illuminate\Support\Str;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -31,7 +32,11 @@ class PostController extends Controller
     public function create(Post $post)
     {
         $categories = Category::all();
-        return view ('admin.posts.create',compact('categories'));
+
+        //recupero i tags,importo il model,e li passo alla create in modo che possano essere utilizzati
+        $tags = Tag::all();
+
+        return view ('admin.posts.create',compact('categories','tags'));
     }
 
     /**
@@ -48,7 +53,8 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'post' => 'required',
             //aggiungo la validation per evitare che venga cambiato l'id delle categorie(validation laravel)
-            'category_id' => 'nullable|exists:categories, id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'exists:tags,id'
         ]);
 
         $newPost = new Post();
@@ -70,6 +76,12 @@ class PostController extends Controller
             $counter ++;
         }
         $newPost->save();
+
+        //con il metodo attach() vado a relazionare tag e post - if perchè se esiste almeno 1 tag selezionato entra altrimenti no
+        if (array_key_exists('tags', $data)) {
+            $newPost->tags()->attach($data['tags']);
+        }
+        
 
         return redirect()->route('admin.posts.show', $newPost->id);
     }

@@ -30,6 +30,23 @@
                       @endforeach
                   </select>
               </div>
+              {{-- tag --}}
+              <div class="class form-group">
+                  <h4>Seleziona almeno un tag</h4>
+                @foreach ($tags as $tag)
+                <div class="form-check form-check-inline">
+                    {{-- devo modificare i campi input-id, e label for altrimenti genererò tanti campi uguali 
+                        name="tags[]" devo aggiungerlo altrimenti sovrascriverà sempre e non riuscirà ad arrivare un array nello store--}}
+                    <input class="form-check-input" type="checkbox" 
+                    name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}" 
+                    {{ in_array($tag->id, old('tags', [] )) ? 'checked' : ''}}
+                    >
+                    <label class="form-check-label" for="tag-{{$tag->id}}">{{$tag->name}}</label>
+                </div>
+                @endforeach
+              </div>
+              
+                {{-- /tag --}}
               <button class="btn btn-success" type="submit">Salva</button>
               <a class="btn btn-primary ml-3" href="{{ route('admin.posts.index') }}">Elenco articoli</a>
         </form>
