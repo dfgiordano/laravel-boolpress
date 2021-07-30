@@ -31,6 +31,31 @@
                     @endforeach
                 </select>
             </div>
+            {{-- tag --}}
+            <div class="class form-group">
+                <h4>Seleziona almeno un tag</h4>
+              @foreach ($tags as $tag)
+              {{-- devo gestire sia errori di validazione (if) e anche recuoero di dati(else) con contains vado a cercare se nella collection esiste un oggetto con un determinato id  --}}
+              <div class="form-check form-check-inline">
+                    @if ($errors->any())
+                        <input class="form-check-input" type="checkbox" 
+                        name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}" 
+                        {{ in_array($tag->id, old('tags', [] )) ? 'checked' : ''}}
+                        >
+                    @else
+                        <input class="form-check-input" type="checkbox" 
+                        name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}" 
+                        {{ $post->tags->contains($tag->id) ? 'checked' : '' }}
+                        >
+                    @endif
+                    <label class="form-check-label" for="tag-{{$tag->id}}">{{$tag->name}}</label>
+              </div>
+              @error('tags')
+                  <small class="text-danger d-block"> {{$message}} </small>
+              @enderror
+              @endforeach
+            </div>
+              {{-- /tag --}}
               <button class="btn btn-success" type="submit">Salva</button>
               <a class="btn btn-primary ml-3" href="{{ route('admin.posts.index') }}">Elenco articoli</a>
         </form>

@@ -20,6 +20,6 @@ class Post extends Model
 
     //metto in relazione con il metodo tags (devo recuperare tutti i tags)
     public function tags() {
-        return $this->BelongsToMany('App\Tag');
+        return $this->belongsToMany('App\Tag');
     }
 }

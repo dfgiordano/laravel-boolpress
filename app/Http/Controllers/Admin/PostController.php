@@ -53,6 +53,7 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'post' => 'required',
             //aggiungo la validation per evitare che venga cambiato l'id delle categorie(validation laravel)
+            //exists:(nome della tabella, dato) in questo modo controllo che l'id sia presente e non sia stato modificato
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'exists:tags,id'
         ]);
@@ -110,8 +111,10 @@ class PostController extends Controller
     {   
         //recupero le categorie per riuscire a stamparle in edit.blade.php
         $categories = Category::all();
+        //recupero i tag nella view edit, e li aggiungo al compact
+        $tags = Tag::all();
 
-        return view ('admin.posts.edit', compact('post','categories'));
+        return view ('admin.posts.edit', compact('post','categories','tags'));
     }
 
     /**
@@ -146,6 +149,13 @@ class PostController extends Controller
             $data['slug'] = $slug;
             }
             $post->update($data);
+            //in update uso il metodo sync, perchè può darsi che già ci fossero associati dei tags quindi devo poterli modificare, detach + attach
+            if(array_key_exists('tags', $data)) {
+                $post->tags()->sync($data['tags']);
+            } else {
+            //metto l'else perchè nel caso in cui vado a togliere dei tags senza aggiungercene altri, devo detachare tutto (di sonseguenza non serve passargli gli id tra parentesi)
+                $post->tags()->detach();
+            }
 
             return redirect()->route('admin.posts.show', $post->id);
     }
