@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+//creo un gruppo per gestie tutte le rotte api così cme avevamo fatto per quelle admin
+Route::namespace('Api')
+        ->group(function() {
+            Route::get('/posts','PostController@index');
+        });
+

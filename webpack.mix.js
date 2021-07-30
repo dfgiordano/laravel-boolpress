@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/admin.js', 'public/js')
 //creo un altro file da caricare poi nel front.js cambiandogli il nome
     .js('resources/js/front.js', 'public/js').vue()
     .sass('resources/sass/app.scss', 'public/css');

@@ -5,6 +5,11 @@ window.Vue = require('vue').default;
 //per utilizzare vue devo importarlo qui
 import App from '../views/guest/App.vue';
 
+
+//importo entrambi copiandoli dal file bootstrap.js -import comune
+window.axios = require('axios');
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //creo una nuova istanza di vue 
 var app = new Vue(
     {
