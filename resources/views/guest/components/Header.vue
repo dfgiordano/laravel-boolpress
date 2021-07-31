@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Sito front-end</h1>
+        <h1>BoolBlog</h1>
         <nav>
             <ul>
                 <li>

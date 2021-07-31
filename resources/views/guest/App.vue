@@ -3,20 +3,12 @@
         <Header />
         <main class="container">
             <div class="row">
-                <div class="col-4 d-flex my-2"
+                <Card 
                 v-for="post in posts"
-                :key="post.id">
-                    <div class="card w-100">
-                        <div class="card-body">
-                            <h3>{{post.title}}</h3>
-                            <p>{{textView(post.post,100)}}</p>
-                            <a class="card-link" href="#">Leggi l'articolo</a>
-                        </div>
-                    </div>
+                :key="post.id"
+                :item="post"
+                />
             </div>
-            </div>
-            
-            
         </main>
         <Footer />
     </div>
@@ -24,6 +16,7 @@
 
 <script>
 import Header from './components/Header';
+import Card from './components/Card';
 import Footer from './components/Footer';
 
 export default {
@@ -44,6 +37,7 @@ export default {
     },
     components: {
         Header,
+        Card,
         Footer,
     },
     //al created vado a fare la chiamata axios per recuperare i miei dati
@@ -55,6 +49,12 @@ export default {
                 console.log(res.data);
                 //salvo nell'array vuoto i risultati che stanno arrivando con la chiamata axios(arrow function così non cambia il this)
                 this.posts = res.data;
+
+                this.posts.forEach(
+                    element => {
+                        element.excerpt = this.textView(element.post, 150);
+                    }
+                )
             }
                 
         )
