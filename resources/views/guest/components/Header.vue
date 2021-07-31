@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h1>Sito front-end</h1>
         <nav>
             <ul>
@@ -29,17 +29,20 @@ export default {
         margin: 30px;
         color: red;
     }
+    ul {
+        text-align: center;
+    }
     li {
         display: inline-block;
-        margin: 10px;
-    }
-    a {
-        text-decoration: none;
-        padding: 10px;
-        color: black;
-            &:hover,
-            &active {
-                background-color: lightgreen;
+        margin: 5px;
+            a {
+                text-decoration: none;
+                padding: 10px;
+                color: black;
+                    &:hover,
+                    &.active {
+                        background-color: lightgreen;
+                    }
             }
     }
 </style>
