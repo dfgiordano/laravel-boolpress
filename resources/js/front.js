@@ -3,7 +3,9 @@
 window.Vue = require('vue').default;
 
 //per utilizzare vue devo importarlo qui
-import App from '../views/guest/App.vue';
+import App from './App.vue';
+import router from './router';
+
 
 
 //importo entrambi copiandoli dal file bootstrap.js -import comune
@@ -14,6 +16,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var app = new Vue(
     {
         el:'#root',
-        render: h => h(App)
+        render: h => h(App),
+        router //aggiungo il router alla mia istanza di vue
     }
 )

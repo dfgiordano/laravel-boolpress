@@ -4,13 +4,18 @@
         <nav>
             <ul>
                 <li>
-                    <a class="active" href="">Home</a>
+                    <!-- <a class="active" href="">Home</a> -->
+                    <!-- se faccio il passaggio statico mi va beneil primo, altrimenti v-bind e passo tra graffe il nome delle rotte -->
+                    <!-- <router-link to="/">Home</router-link> -->
+                    <router-link :to="{name: 'home'}">Home</router-link>
                 </li>
                 <li>
-                    <a href="">Contatti</a>
+                    <!-- <a href="">Blog</a> -->
+                    <router-link :to="{name: 'blog'}">Blog</router-link>
                 </li>
                 <li>
-                    <a href="">Chi siamo</a>
+                    <!-- <a href="">Chi siamo</a> -->
+                    <router-link :to="{name: 'about'}">Chi siamo</router-link>
                 </li>
             </ul>
         </nav>

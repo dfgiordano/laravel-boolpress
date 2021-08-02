@@ -46,7 +46,7 @@ export default {
         .get('http://127.0.0.1:8000/api/posts')
         .then(
             res => {
-                console.log(res.data);
+                // console.log(res.data);
                 //salvo nell'array vuoto i risultati che stanno arrivando con la chiamata axios(arrow function così non cambia il this)
                 this.posts = res.data;
 
