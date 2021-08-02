@@ -19,5 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Api')
         ->group(function() {
             Route::get('/posts','PostController@index');
+            //aggiungo la nuova rotta che andrà a gestire la pagina del dettaglio del post
+            Route::get('/posts/{slug}','PostController@show');
         });
 

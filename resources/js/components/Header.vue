@@ -45,7 +45,7 @@ export default {
                 padding: 10px;
                 color: black;
                     &:hover,
-                    &.active {
+                    &.router-link-exact-active {
                         background-color: lightgreen;
                     }
             }

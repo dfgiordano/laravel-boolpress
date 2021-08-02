@@ -5,7 +5,7 @@ import VueRouter from 'vue-router';
 //inizializzo vue router
 Vue.use(VueRouter);
 
-//import del componente home.vue creato dentro pages per utilizzarlo
+//import dei componenti creati dentro pages per utilizzarli
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import About from './pages/About';

@@ -14,4 +14,10 @@ class PostController extends Controller
         //devo passarli al json che li passerà alla rotta api che ho creato
         return response()->json($posts);
     }
+    //definisco la nuova rotta, che gestirà la pagina nel dettaglio del post, parametro slug, recuperando dai post il post cn quel determinato parametro
+    public function show($slug) {
+        $post = Post::where('slug', $slug)->first();
+
+        return response()->json($post);
+    }
 }
