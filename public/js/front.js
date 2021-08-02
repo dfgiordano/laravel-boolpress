@@ -2147,6 +2147,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'SinglePost',
@@ -2296,7 +2301,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "div[data-v-e79ec684] {\n  text-align: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "div[data-v-e79ec684] {\n  text-align: center;\n}\nimg[data-v-e79ec684] {\n  height: 300px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2344,7 +2349,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "h3[data-v-67cb3b51] {\n  margin-top: 20px;\n  color: blue;\n}\np[data-v-67cb3b51] {\n  height: 200px;\n  margin: 10px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "h3[data-v-67cb3b51] {\n  margin-top: 20px;\n  color: blue;\n}\np[data-v-67cb3b51] {\n  height: 200px;\n  margin: 10px;\n}\nh6[data-v-67cb3b51] {\n  margin: 20px 0;\n}\nh6 span[data-v-67cb3b51] {\n  margin: 2px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4168,6 +4173,35 @@ var render = function() {
           _vm._v(" "),
           _c("div", [
             _c("h3", [_vm._v(_vm._s(_vm.post.title))]),
+            _vm._v(" "),
+            _vm.post.category
+              ? _c("h4", [
+                  _vm._v("Categoria: "),
+                  _c("span", { staticClass: "badge badge-info" }, [
+                    _vm._v(_vm._s(_vm.post.category.name))
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "h6",
+                [
+                  _vm._v("Tags: "),
+                  _vm._l(_vm.post.tags, function(tag) {
+                    return _c(
+                      "span",
+                      {
+                        key: tag.id,
+                        staticClass: "badge badge-pills badge-secondary"
+                      },
+                      [_vm._v(_vm._s(tag.name))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(_vm.post.post))])
           ]),

@@ -16,7 +16,9 @@ class PostController extends Controller
     }
     //definisco la nuova rotta, che gestirà la pagina nel dettaglio del post, parametro slug, recuperando dai post il post cn quel determinato parametro
     public function show($slug) {
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->with(['category','tags'])->first();
+
+        // (->with(['category','tags']) EAGER LOADING (in blade LAZY LOADING, glielo passo per far si che recuperi anche tags e categorie per poi averle disponibili da stampare in pagina )
 
         return response()->json($post);
     }

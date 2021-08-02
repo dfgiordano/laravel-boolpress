@@ -15,4 +15,7 @@ export default {
     div {
         text-align:center;
     }
+    img {
+        height: 300px;
+    }
 </style>

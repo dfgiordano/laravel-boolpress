@@ -3,6 +3,11 @@
         <h1>Leggi l'articolo:</h1>
         <div>
             <h3>{{post.title}}</h3>
+            <h4 v-if="post.category">Categoria: <span class="badge badge-info">{{ post.category.name }}</span></h4>
+            <div>
+                <h6>Tags: <span class="badge badge-pills badge-secondary" v-for="tag in post.tags" :key="tag.id">{{ tag.name }}</span> </h6>
+                
+            </div>
             <p>{{post.post}}</p>
         </div>
         <router-link :to="{ name: 'blog' }">Torna all'elenco</router-link>
@@ -51,5 +56,11 @@ export default {
     p {
         height: 200px;
         margin: 10px;
+    }
+    h6 {
+        margin: 20px 0;
+        span {
+            margin: 2px;
+        }
     }
 </style>
